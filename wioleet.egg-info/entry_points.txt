@@ -1,0 +1,4 @@
+
+        [console_scripts]
+        wioleet=src.wioleet:cli
+    

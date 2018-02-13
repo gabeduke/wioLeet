@@ -1,0 +1,7 @@
+user:
+  token: SHFJSRtqRmgaRRQZ
+  baseurl: https://us.wio.seeed.io/
+
+node:
+  sensor: GenericAInA0
+  token: 6bb3a73ba99502614dc1abed69d8da01
