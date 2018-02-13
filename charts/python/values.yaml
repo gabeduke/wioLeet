@@ -6,6 +6,8 @@ image:
   repository: wioleet
   tag: v0.1.0
   pullPolicy: IfNotPresent
+ingress:
+  enabled: true
 service:
   name: python
   type: ClusterIP
