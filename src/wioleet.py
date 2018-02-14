@@ -34,7 +34,7 @@ def wioLeet(name):
 @cli.command()
 def daemon():
     s = config.node.schedule
-    schedule.every(s).minutes.do(log)
+    schedule.every(int(s)).minutes.do(log)
 
     while True:
         schedule.run_pending()
