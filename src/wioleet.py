@@ -5,32 +5,25 @@ import click_config
 import schedule
 import time
 
+from influxdb import InfluxDBClient
+from .sensors import sensors
 from .wio_config import config
 from flask import Flask
 
-
+# init flask
 app = Flask(__name__)
 
-analog = {
-    'name': 'GenericAInA0',
-    'params': {
-        'analog': 'analog',
-        'voltage': 'volt',
-    }
-}
+# init db connector
+host = config.user.db_host
+port = config.user.db_port
+dbname = config.user.db_name
+
+db = InfluxDBClient(host, port, database=dbname)
 
 @click.group()
 @click_config.wrap(module=config)
 def cli():
     pass
-
-
-@cli.command()
-def test():
-    click.echo(config.user.token)
-    click.echo(config.user.base_url)
-    click.echo(config.node.sensor)
-    click.echo(config.node.token)
 
 
 @cli.command()
@@ -40,7 +33,8 @@ def wioLeet(name):
 
 @cli.command()
 def daemon():
-    schedule.every(1).minutes.do(log)
+    shedule = config.node.schedule
+    schedule.every(schedule).minutes.do(log)
 
     while True:
         schedule.run_pending()
@@ -59,22 +53,32 @@ def mean(numbers):
 @cli.command()
 @app.route('/log')
 def log():
-    d = get_data()
+    d = get_data(
+        config.node.sensor,
+        config.node.param,
+        )
 
-    url = "http://influxdb-influxdb:8086/write?db=leetbase"
-    payload = ("--data-binary 'soil1,wionode=wio1 value=%s'" % d)
-    req = requests.post(url, data=payload)
-    resp_dict = json.loads(req.content.decode('utf-8'))
+    json_body = [
+        {
+            "measurement": "soil1",
+            "fields": {
+                "Float_value": d,
+            }
+        }
+    ]
 
-    return str(resp_dict)
+    resp = db.write_points(json_body)
+    print(resp)
 
 
-@app.route('/sensor')
-def get_data():
+
+def get_data(sensor, param):
+
+    sensor_map = sensors.get(sensor)
+    params_map = sensors.get(sensor).get('params')
 
     url = config.user.base_url + "v1/node"
-    url += "/" + str(analog['name'])                # sensor name
-    url += "/" + str(analog['params']['analog'])    # sensor param
+    url += "/{0}/{1}".format(sensor_map.get('name'), params_map.get(param))
 
     payload = {
         "access_token": config.node.token
@@ -84,4 +88,4 @@ def get_data():
     resp_dict = json.loads(req.content.decode('utf-8'))
     sensor_data = resp_dict['analog']
 
-    return str(sensor_data)
+    return float(sensor_data)

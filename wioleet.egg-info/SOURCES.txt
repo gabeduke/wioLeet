@@ -1,5 +1,6 @@
 README.md
 src/__init__.py
+src/sensors.py
 src/wio_config.py
 src/wioleet.py
 wioleet.egg-info/PKG-INFO
