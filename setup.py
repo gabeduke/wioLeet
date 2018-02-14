@@ -10,6 +10,7 @@ setup(
         'click_config',
         'flask',
         'requests',
+        'schedule',
     ],
     entry_points='''
         [console_scripts]
