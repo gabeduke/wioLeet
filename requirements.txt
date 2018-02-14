@@ -3,3 +3,4 @@ click_config
 flask
 requests
 schedule
+influxdb

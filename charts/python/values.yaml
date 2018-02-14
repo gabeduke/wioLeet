@@ -5,7 +5,7 @@ replicaCount: 2
 image:
   repository: wioleet
   tag: v0.1.0
-  pullPolicy: IfNotPresent
+  pullPolicy: Always
 service:
   name: python
   type: ClusterIP
@@ -18,11 +18,3 @@ resources:
   requests:
     cpu: 100m
     memory: 128Mi
-
-secrets:
-  USER_TOKEN: SHFJSRtqRmgaRRQZ
-  NODE_TOKEN: 6bb3a73ba99502614dc1abed69d8da01
-  BASE_URL: https://us.wio.seeed.io/
-
-sensors:
-  s1: GenericAInA0
