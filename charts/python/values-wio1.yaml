@@ -5,7 +5,7 @@ secrets:
 configmap:
   BASE_URL: https://us.wio.seeed.io/
   DB_NAME: 'leetbase'
-  DB_HOST: 'localhost'
+  DB_HOST: 'influxdb-influxdb'
   DB_PORT: 8086
   NODE_SENSOR: 'analog'
   NODE_PARAM: 'analog'

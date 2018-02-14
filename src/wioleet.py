@@ -2,6 +2,7 @@ import requests
 import json
 import click
 import click_config
+import datetime
 import schedule
 import time
 
@@ -61,15 +62,15 @@ def log():
     json_body = [
         {
             "measurement": "soil1",
+            "time": str(datetime.datetime.now()),
             "fields": {
-                "Float_value": d,
+                "Int_value": d,
             }
         }
     ]
 
-    resp = db.write_points(json_body)
-    print(resp)
-
+    print("write points: {0}".format(json_body))
+    db.write_points(json_body)
 
 
 def get_data(sensor, param):
@@ -77,7 +78,7 @@ def get_data(sensor, param):
     sensor_map = sensors.get(sensor)
     params_map = sensors.get(sensor).get('params')
 
-    url = config.user.base_url + "v1/node"
+    url =  "{0}v1/node".format(config.user.base_url)
     url += "/{0}/{1}".format(sensor_map.get('name'), params_map.get(param))
 
     payload = {
@@ -88,4 +89,4 @@ def get_data(sensor, param):
     resp_dict = json.loads(req.content.decode('utf-8'))
     sensor_data = resp_dict['analog']
 
-    return float(sensor_data)
+    return sensor_data
