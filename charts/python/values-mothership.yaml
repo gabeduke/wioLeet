@@ -15,3 +15,6 @@ configmap:
 image:
   repository: docker.io/dukeman/wioleet_v2
   tag: latest
+
+influxdb:
+  enabled: false

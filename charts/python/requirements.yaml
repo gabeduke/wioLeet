@@ -1,0 +1,5 @@
+dependencies:
+- name: influxdb
+  version: 0.8.2
+  repository: "https://kubernetes-charts.storage.googleapis.com"
+  condition: influxdb.enabled
