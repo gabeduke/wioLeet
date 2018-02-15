@@ -34,12 +34,20 @@ def serve():
 
 
 @cli.command()
+@app.route('/query')
+def querySensorData():
+    w = wioLeet()
+    resp = w.query_db()
+
+    return str(resp)
+
+@cli.command()
 @app.route('/log')
 def writeSensorData():
     w = wioLeet()
-    w.log_data()
+    resp = w.log_data()
 
-    return print("success")
+    return str(resp)
 
 
 @cli.command()
