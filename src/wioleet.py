@@ -55,5 +55,4 @@ def daemon(ctx):
         ctx.forward(writeSensorData)
 
         logging.debug("sleeping..")
-        # time.sleep(timer - ((time.time() - starttime) % timer))
-        time.sleep(5)
+        time.sleep(timer - ((time.time() - starttime) % timer))
