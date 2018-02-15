@@ -15,6 +15,7 @@ spec:
     spec:
       containers:
       - name: {{ .Chart.Name }}
+        tty: true
         image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
         imagePullPolicy: {{ .Values.image.pullPolicy }}
         command:

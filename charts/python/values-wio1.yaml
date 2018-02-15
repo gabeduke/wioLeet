@@ -9,7 +9,8 @@ configmap:
   DB_PORT: 8086
   NODE_SENSOR: 'analog'
   NODE_PARAM: 'analog'
-  NODE_SCHEDULE: 5
+  NODE_SCHEDULE: 300
+  PYTHONUNBUFFERED: 0
 
 image:
   repository: docker.io/dukeman/wioleet_v2

@@ -1,12 +1,14 @@
 user:
   token: SHFJSRtqRmgaRRQZ
-  baseurl: https://us.wio.seeed.io/
-  db_name: 'leetbase'
-  db_host: 'localhost'
-  db_port: 8086
 
 node:
   sensor: analog
   param: analog
   token: 6bb3a73ba99502614dc1abed69d8da01
-  schedule: 5
+
+app:
+  baseurl: https://us.wio.seeed.io/
+  schedule: 15
+  db_name: 'leetbase'
+  db_host: 'localhost'
+  db_port: 8086
