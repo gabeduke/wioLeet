@@ -24,6 +24,11 @@ class wioLeet:
         self.db = InfluxDBClient(host, port, database=dbname)
 
 
+    def query_db(self):
+        result = self.db.query('select * from soil1;')
+        return result
+
+
     def log_data(self):
         logging.info("Getting sensor data...")
         d = self.get_data(
@@ -43,6 +48,7 @@ class wioLeet:
 
         logging.debug("Write points: {}".format(json_body))
         self.db.write_points(json_body)
+        return d
 
 
     def get_data(self, sensor, param):
