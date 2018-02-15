@@ -40,10 +40,6 @@ def writeSensorData():
     w.log_data()
 
 
-def asdf():
-    print("asdf")
-
-
 @cli.command()
 @click.pass_context
 def daemon(ctx):
