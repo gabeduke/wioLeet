@@ -39,6 +39,8 @@ def writeSensorData():
     w = wioLeet()
     w.log_data()
 
+    return print("success")
+
 
 @cli.command()
 @click.pass_context

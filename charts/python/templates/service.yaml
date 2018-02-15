@@ -3,7 +3,9 @@ kind: Service
 metadata:
   name: {{ template "fullname" . }}
   labels:
+    draft: {{ default "draft-app" .Values.draft }}
     chart: "{{ .Chart.Name }}-{{ .Chart.Version | replace "+" "_" }}"
+    app: {{ template "fullname" . }}
 spec:
   type: {{ .Values.service.type }}
   ports:
@@ -12,4 +14,5 @@ spec:
     protocol: TCP
     name: {{ .Values.service.name }}
   selector:
+    draft: {{ default "draft-app" .Values.draft }}
     app: {{ template "fullname" . }}
