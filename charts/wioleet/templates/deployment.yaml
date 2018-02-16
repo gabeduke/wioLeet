@@ -25,9 +25,9 @@ spec:
           - {{ .Values.image.command }}
         envFrom:
           - configMapRef:
-              name: wioleet-configmap
+              name: {{ template "fullname" . }}-configmap
           - secretRef:
-              name: wioleet-secrets
+              name: {{ template "fullname" . }}-secrets
         ports:
         - containerPort: {{ .Values.service.internalPort }}
         resources:

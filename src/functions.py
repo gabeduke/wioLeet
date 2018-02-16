@@ -38,8 +38,11 @@ class wioLeet:
 
         json_body = [
             {
-                "measurement": "soil1",
+                "measurement": config.node.param,
                 "time": str(datetime.datetime.now()),
+                "tags": {
+                    "fleet": "sensors",
+                },
                 "fields": {
                     "Int_value": d,
                 }
@@ -59,7 +62,7 @@ class wioLeet:
         logging.debug("Parameter map: {}".format(params_map))
 
         url =  "{0}v1/node".format(config.app.base_url)
-        url += "/{0}/{1}".format(sensor_map.get('name'), params_map.get(param))
+        url += "/{0}/{1}".format(sensor_map.get('name'), param)
         logging.debug("URL: {}".format(url))
 
         payload = {
@@ -72,7 +75,7 @@ class wioLeet:
         resp_dict = json.loads(req.content.decode('utf-8'))
         logging.debug("Response: {}".format(resp_dict))
 
-        sensor_data = resp_dict['analog']
+        sensor_data = resp_dict[params_map.get(param)]
         logging.info("Sensor value: {}".format(sensor_data))
 
         return sensor_data
