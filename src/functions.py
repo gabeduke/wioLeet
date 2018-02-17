@@ -36,6 +36,11 @@ class wioLeet:
             config.node.param,
             )
 
+        if isinstance(d, int):
+            fieldType = "Int_value"
+        elif isinstance(d, float):
+            fieldType = "float"
+
         json_body = [
             {
                 "measurement": config.node.param,
@@ -45,7 +50,7 @@ class wioLeet:
                     "sensor": config.app.sensor_tag,
                 },
                 "fields": {
-                    "Int_value": d,
+                    fieldType: d,
                 }
             }
         ]
