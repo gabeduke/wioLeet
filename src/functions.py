@@ -42,6 +42,7 @@ class wioLeet:
                 "time": str(datetime.datetime.now()),
                 "tags": {
                     "fleet": "sensors",
+                    "sensor": config.app.sensor_tag,
                 },
                 "fields": {
                     "Int_value": d,

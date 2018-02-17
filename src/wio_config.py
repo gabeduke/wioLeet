@@ -15,3 +15,4 @@ class config(object):
         db_name = os.getenv('DB_NAME', 'leetbase')
         db_host = os.getenv('DB_HOST', 'influxdb-influxdb')
         db_port = os.getenv('DB_PORT', 8086)
+        sensor_tag = os.getenv('SENSOR_TAG', 'default')

@@ -12,3 +12,4 @@ app:
   db_name: 'leetbase'
   db_host: 'localhost'
   db_port: 8086
+  sensor_tag: soil1
